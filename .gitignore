@@ -1,3 +1,6 @@
-/.idea
+/Yulia_Klimova/.idea
 *.iml
-*.xml
+modules.xml
+vcs.xml
+workplace.xml
+misc.xml
