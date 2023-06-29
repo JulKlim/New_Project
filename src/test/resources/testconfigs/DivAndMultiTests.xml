@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite4" verbose="4" >
+    <test name="DivAndMultiTests" >
+        <classes>
+            <class name="com.epam.tc.hw1.CalculatorMultiTest" />
+            <class name="com.epam.tc.hw1.CalculatorDivTest"/>
+        </classes>
+    </test>
+</suite>
