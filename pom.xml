@@ -62,7 +62,6 @@
             </plugin>
         </plugins>
     </build>
-
     <dependencies>
         <!--mvn install:install-file -Dfile=C:\Users\Yulia_Klimova\YulK_JavaATCourse\calculator-1.0.jar -DgroupId="com.epam.tat.module4" -DartifactId=calculator -Dversion="1.0" -Dpackaging=jar-->
         <dependency>
@@ -112,10 +111,13 @@
             </properties>
         </profile>
         <profile>
-            <id>DivisionAndMultiTestsProfile</id>
+            <id>AddAndSubTestsProfile</id>
             <properties>
-                <surefire.testingxmlfile>src/test/resources/testconfigs/DivAndMultiTests.xml</surefire.testingxmlfile>
+                <surefire.testingxmlfile>src/test/resources/testconfigs/SumAndSubtest.xml</surefire.testingxmlfile>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
     </profiles>
 </project>
