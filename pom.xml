@@ -119,5 +119,11 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
+        <profile>
+            <id>HW2_Tests</id>
+            <properties>
+                <surefire.testingxmlfile>src/test/resources/testconfigs/HW2Tests.xml</surefire.testingxmlfile>
+            </properties>
+        </profile>
     </profiles>
 </project>
