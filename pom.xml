@@ -125,5 +125,11 @@
                 <surefire.testingxmlfile>src/test/resources/testconfigs/HW2Tests.xml</surefire.testingxmlfile>
             </properties>
         </profile>
+        <profile>
+            <id>HW2_Refactored_Tests</id>
+            <properties>
+                <surefire.testingxmlfile>src/test/resources/testconfigs/HW2Refactored.xml</surefire.testingxmlfile>
+            </properties>
+        </profile>
     </profiles>
 </project>
