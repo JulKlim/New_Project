@@ -1,5 +1,6 @@
 package com.epam.tc.hw3.ex1;
 
+import io.qameta.allure.Step;
 import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -18,12 +19,14 @@ public class HomePageHeader {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+    @Step("Checking number of header items")
     public boolean isItemsCountCorrect(int expectedNumberOfButtons) {
         List<WebElement> headerButtons = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                 By.cssSelector("ul.uui-navigation.nav.navbar-nav.m-l8:first-of-type>li>a")));
         return (headerButtons.size() == (expectedNumberOfButtons));
     }
 
+    @Step("Checking names of header items")
     public boolean isItemsNamesCorrect(String[] expectedHeaderButtonsTexts) {
         List<WebElement> headerButtons = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                 By.cssSelector("ul.uui-navigation.nav.navbar-nav.m-l8:first-of-type>li>a")));

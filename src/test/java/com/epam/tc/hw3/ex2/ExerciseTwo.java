@@ -3,11 +3,22 @@ package com.epam.tc.hw3.ex2;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.epam.tc.hw2.ex1.WebdriverSetUp;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-
+@Listeners(ScreenshotListener.class)
+@Severity(SeverityLevel.BLOCKER)
+@Epic("Selenium UI exercises")
+@Feature("Ex2")
+@Story("Ex2: Log in and checking different elements page")
 public class ExerciseTwo extends WebdriverSetUp {
+
 
     //1 Open test site by URL
     @Test(priority = 1)
@@ -20,7 +31,7 @@ public class ExerciseTwo extends WebdriverSetUp {
     @Test(priority = 2)
     public void checkTitle() {
         HomePage homePage = new HomePage(driver);
-        boolean isTitleCorrect = homePage.checkTitle("Home Page");
+        boolean isTitleCorrect = homePage.checkTitle("Home Pagee");
         assertThat(isTitleCorrect).as("Title is 'Home Page'").isTrue();
     }
 
@@ -89,7 +100,8 @@ public class ExerciseTwo extends WebdriverSetUp {
     @Test(priority = 10)
     public void logRowRadio() {
         DifferentElementsLog differentElementsLog = new DifferentElementsLog(driver);
-        boolean isLogRowSelenDisplayed = differentElementsLog.isLogRowRadioDisplayed("metal: value changed to  Selen");
+        boolean isLogRowSelenDisplayed = differentElementsLog.isLogRowRadioDisplayed(
+                "metal: value changed to  Selen");
 
         assertThat(isLogRowSelenDisplayed).isTrue();
     }

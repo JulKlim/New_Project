@@ -3,10 +3,18 @@ package com.epam.tc.hw3.ex1;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.epam.tc.hw2.ex1.WebdriverSetUp;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-
+@Severity(SeverityLevel.CRITICAL)
+@Epic("Selenium UI exercises")
+@Feature("Ex1")
+@Story("Ex1: Log in and checking home page")
 public class ExerciseOne extends WebdriverSetUp {
 
     //1 Open test site by URL

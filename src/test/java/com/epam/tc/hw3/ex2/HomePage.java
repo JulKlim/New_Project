@@ -1,6 +1,6 @@
 package com.epam.tc.hw3.ex2;
 
-
+import io.qameta.allure.Step;
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,16 +18,19 @@ public class HomePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+    @Step("Open Home Page")
     public void openHomePage() {
         driver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
     }
 
+    @Step("Check title 'Home Page'")
     public boolean checkTitle(String expectedTitle) {
-        wait.until(ExpectedConditions.titleIs(expectedTitle));
+        //wait.until(ExpectedConditions.titleIs(expectedTitle));
         String actualTitle = driver.getTitle();
         return actualTitle.equals(expectedTitle);
     }
 
+    @Step("Log in with username{0} and password {1}")
     public void performLogin(String username, String password) {
         WebElement dropdownMenu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-icon")));
         dropdownMenu.click();
@@ -39,12 +42,14 @@ public class HomePage {
         enter.click();
     }
 
+    @Step("Check username is correct")
     public boolean assertUsername(String expectedUsername) {
         WebElement username = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#user-name")));
         return username.getText().equals(expectedUsername);
     }
 
+    @Step("Open the Different Elements page")
     public void openDifferentElements() {
         WebElement menuService = wait.until(
                 ExpectedConditions.elementToBeClickable(
