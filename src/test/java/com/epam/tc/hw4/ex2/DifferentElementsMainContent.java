@@ -1,11 +1,13 @@
-package com.epam.tc.hw3.ex2;
+package com.epam.tc.hw4.ex2;
 
+import io.qameta.allure.Step;
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 
 public class DifferentElementsMainContent {
@@ -17,6 +19,7 @@ public class DifferentElementsMainContent {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+    @Step("Select checkboxes Water and Wind")
     public void selectWaterAndWind() {
         WebElement checkboxWater = wait.until(
                 ExpectedConditions.presenceOfElementLocated(
@@ -33,6 +36,7 @@ public class DifferentElementsMainContent {
         }
     }
 
+    @Step("Select radio button Selen")
     public void selectRadioSelen() {
         WebElement radioSelen = wait.until(
                 ExpectedConditions.elementToBeClickable(
@@ -42,6 +46,7 @@ public class DifferentElementsMainContent {
         }
     }
 
+    @Step("Select yellow color from dropdown")
     public void selectDropdownYellow() {
         WebElement colorsDropdown = wait.until(
                 ExpectedConditions.elementToBeClickable(

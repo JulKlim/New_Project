@@ -1,5 +1,6 @@
-package com.epam.tc.hw3.ex1;
+package com.epam.tc.hw4.ex1;
 
+import io.qameta.allure.Step;
 import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -19,6 +20,7 @@ public class HomePageLeftSideBar {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+    @Step("Checking count of items in left side bar")
     public boolean isItemsLeftSideBarCountCorrect(int expectedNumberOfSections) {
         WebElement sidebar = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector("ul.sidebar-menu.left")));
@@ -28,6 +30,7 @@ public class HomePageLeftSideBar {
         return sectionsOnTheLeft.size() == expectedNumberOfSections;
     }
 
+    @Step("Checking items in left side bar are displayed")
     public boolean areItemsLeftSideBarDisplayed() {
         WebElement sidebar = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector("ul.sidebar-menu.left")));
@@ -44,6 +47,7 @@ public class HomePageLeftSideBar {
         return ifItemsLeftBarDisplayed;
     }
 
+    @Step("Checking names of sections from left side bar are correct")
     public boolean ifSectionNamesMatch(String[] expectedSections) {
         WebElement sidebar = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector("ul.sidebar-menu.left")));

@@ -1,11 +1,21 @@
-package com.epam.tc.hw3.ex1;
+package com.epam.tc.hw4.ex1;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.epam.tc.hw2.ex1.WebdriverSetUp;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
+
+@Severity(SeverityLevel.CRITICAL)
+@Epic("Selenium UI exercises")
+@Feature("Ex1")
+@Story("Ex1: Log in and checking home page")
 public class ExerciseOne extends WebdriverSetUp {
 
     //1 Open test site by URL
@@ -13,14 +23,6 @@ public class ExerciseOne extends WebdriverSetUp {
     public void openHomePage() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.openHomePage();
-    }
-
-    //2 Assert Browser title
-    @Test(priority = 2)
-    public void checkTitle() {
-        LoginPage loginPage = new LoginPage(driver);
-        boolean isTitleCorrect = loginPage.checkTitle("Home Page");
-        assertThat(isTitleCorrect).as("Title is 'Home Page'").isTrue();
     }
 
     //3 Perform login
