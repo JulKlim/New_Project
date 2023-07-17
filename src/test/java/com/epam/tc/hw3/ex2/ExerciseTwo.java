@@ -107,6 +107,6 @@ public class ExerciseTwo extends WebdriverSetUp {
     //10 Closing browser
     @AfterClass
     public void closing() {
-        driver.close();
+        driver.quit();
     }
 }

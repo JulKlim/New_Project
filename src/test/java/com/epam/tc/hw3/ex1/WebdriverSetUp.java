@@ -9,12 +9,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 
 
-
 public class WebdriverSetUp {
     public WebDriver driver;
     public WebDriverWait wait;
     public LoginPage loginPage;
-    public  HomePageHeader homePageHeader;
+    public HomePageHeader homePageHeader;
     public HomePageIndex homePageIndex;
     public HomePageMainContent homePageMainContent;
     public HomePageLeftSideBar homePageLeftSideBar;
