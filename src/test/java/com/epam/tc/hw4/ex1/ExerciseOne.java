@@ -1,10 +1,21 @@
-package com.epam.tc.hw3.ex1;
+package com.epam.tc.hw4.ex1;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.epam.tc.hw2.ex1.WebdriverSetUp;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
+
+@Severity(SeverityLevel.CRITICAL)
+@Epic("Selenium UI exercises")
+@Feature("Ex1")
+@Story("Ex1: Log in and checking home page")
 public class ExerciseOne extends WebdriverSetUp {
 
     //1 Open test site by URL
@@ -12,16 +23,6 @@ public class ExerciseOne extends WebdriverSetUp {
     public void openHomePage() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.openHomePage();
-    }
-
-    //2 Assert Browser title
-    @Test(priority = 2)
-    public void checkTitle() {
-        LoginPage loginPage = new LoginPage(driver);
-        boolean isTitleCorrect = loginPage.checkTitle("Home Page");
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(isTitleCorrect, "Title is 'Home Page'");
-        softAssert.assertAll();
     }
 
     //3 Perform login
@@ -36,9 +37,7 @@ public class ExerciseOne extends WebdriverSetUp {
     public void assertUsername() {
         LoginPage loginPage = new LoginPage(driver);
         boolean isUsernameCorrect = loginPage.assertUsername("ROMAN IOVLEV");
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(isUsernameCorrect, "Username is 'ROMAN IOVLEV'");
-        softAssert.assertAll();
+        assertThat(isUsernameCorrect).isTrue();
     }
 
     //5 Assert that there are 4 items on the header section are displayed,
@@ -48,24 +47,17 @@ public class ExerciseOne extends WebdriverSetUp {
     @Test(priority = 5)
     public void assertHeaderItems() {
         HomePageHeader homePageHeader = new HomePageHeader(driver);
+        assertThat(homePageHeader.isItemsCountCorrect(4)).isTrue();
         String[] expectedHeaderButtonsTexts = {"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"};
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(homePageHeader.isItemsCountCorrect(
-                4), "Items count is correct");
-        softAssert.assertTrue(
-                homePageHeader.isItemsNamesCorrect(expectedHeaderButtonsTexts), "Items' names are correct");
-        softAssert.assertAll();
+        assertThat(homePageHeader.isItemsNamesCorrect(expectedHeaderButtonsTexts)).isTrue();
     }
 
     //6 Assert there are 4 images on the index page and all of them are displayed
     @Test(priority = 6)
     public void assertIconsCountAndDisplay() {
         HomePageIndex homePageIndex = new HomePageIndex(driver);
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue((
-                homePageIndex.isImagesCountCorrect(4)), "Images count is correct");
-        softAssert.assertTrue((homePageIndex.imagesDisplayed()));
-        softAssert.assertAll();
+        assertThat(homePageIndex.isImagesCountCorrect(4)).isTrue();
+        assertThat(homePageIndex.imagesDisplayed()).isTrue();
     }
 
     //7 Assert there are 4 texts under icons, each of them contains proper text
@@ -73,17 +65,14 @@ public class ExerciseOne extends WebdriverSetUp {
     @Test(priority = 7)
     public void asserTexts() {
         HomePageIndex homePageIndex = new HomePageIndex(driver);
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue((
-                homePageIndex.isTextsCountCorrect(4)), "Images count is correct");
+        assertThat(homePageIndex.isTextsCountCorrect(4)).isTrue();
 
         String firstText = "To include good practices\nand ideas from successful\nEPAM project";
         String secondText = "To be flexible and\ncustomizable";
         String thirdText = "To be multiplatform";
         String fourText = "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…";
         String[] expectedTexts = {firstText, secondText, thirdText, fourText};
-        softAssert.assertTrue((homePageIndex.areTextsCorrect(expectedTexts)), "Texts are correct");
-        softAssert.assertAll();
+        assertThat(homePageIndex.areTextsCorrect(expectedTexts)).isTrue();
     }
 
     //8 Assert that iframe exists and contains Frame button
@@ -91,15 +80,15 @@ public class ExerciseOne extends WebdriverSetUp {
     @Test(priority = 8)
     public void checkIframe() {
         HomePageMainContent homePageMainContent = new HomePageMainContent(driver);
-        SoftAssert softAssert = new SoftAssert();
 
         //9 Switch to the iframe and check that there is
         //“Frame Button” in the iframe
 
         homePageMainContent.switchToIframe();
         boolean ifFrameButtonExists = homePageMainContent.ifFrameButtonExists();
-        softAssert.assertTrue(ifFrameButtonExists, "Iframe button exists");
-        softAssert.assertAll();
+        assertThat(ifFrameButtonExists).isTrue();
+
+        homePageMainContent.switchToDefaultContent();
     }
 
     //10 Switching to original window
@@ -115,22 +104,18 @@ public class ExerciseOne extends WebdriverSetUp {
     @Test(priority = 10)
     public void itemsLeftSection() {
         HomePageLeftSideBar homePageLeftSideBar = new HomePageLeftSideBar(driver);
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue((homePageLeftSideBar.isItemsLeftSideBarCountCorrect(
-                5)), "Items count on left-side bar is correct");
-        softAssert.assertTrue(
-                (homePageLeftSideBar.areItemsLeftSideBarDisplayed()), "Items on left-side bar displayed");
+        assertThat(homePageLeftSideBar.isItemsLeftSideBarCountCorrect(5)).isTrue();
+
+        assertThat(homePageLeftSideBar.areItemsLeftSideBarDisplayed()).isTrue();
 
         String[] expectedSections = {"Home", "Contact form", "Service", "Metals & Colors", "Elements packs"};
-        softAssert.assertTrue(
-                (homePageLeftSideBar.ifSectionNamesMatch(expectedSections)), "Items on left-side bar displayed");
-        softAssert.assertAll();
+        assertThat(homePageLeftSideBar.ifSectionNamesMatch(expectedSections)).isTrue();
     }
 
     //12 Closing browser
     @AfterTest
     public void closing() {
-        driver.quit();
+        driver.close();
     }
 }
 

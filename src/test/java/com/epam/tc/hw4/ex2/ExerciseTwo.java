@@ -1,11 +1,22 @@
-package com.epam.tc.hw3.ex2;
+package com.epam.tc.hw4.ex2;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.epam.tc.hw2.ex1.WebdriverSetUp;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners(ScreenshotListener.class)
+@Severity(SeverityLevel.BLOCKER)
+@Epic("Selenium UI exercises")
+@Feature("Ex2")
+@Story("Ex2: Log in and checking different elements page")
 public class ExerciseTwo extends WebdriverSetUp {
 
 
@@ -108,6 +119,6 @@ public class ExerciseTwo extends WebdriverSetUp {
     //10 Closing browser
     @AfterClass
     public void closing() {
-        driver.quit();
+        driver.close();
     }
 }
