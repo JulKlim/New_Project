@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.refactored.ex2;
+package com.epam.tc.hw3.refactored.pageobjects;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.time.Duration;
@@ -8,13 +8,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 
-
 public class WebdriverSetUp {
     public WebDriver driver;
     public WebDriverWait wait;
+    public HomePageHeader homePageHeader;
+    public HomePageIndex homePageIndex;
+    public HomePageMainContent homePageMainContent;
+    public HomePageLeftSideBar homePageLeftSideBar;
     public HomePage homePage;
-    public DifferentElementsMainContent differentElementsMainContent;
-    public DifferentElementsLog differentElementsLog;
 
     @BeforeClass
     public void setUp() {
@@ -26,8 +27,9 @@ public class WebdriverSetUp {
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         homePage = new HomePage(driver);
-        differentElementsMainContent = new DifferentElementsMainContent(driver);
-        differentElementsLog = new DifferentElementsLog(driver);
+        homePageHeader = new HomePageHeader(driver);
+        homePageIndex = new HomePageIndex(driver);
+        homePageMainContent = new HomePageMainContent(driver);
+        homePageLeftSideBar = new HomePageLeftSideBar(driver);
     }
-
 }

@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.refactored.ex1;
+package com.epam.tc.hw3.refactored.pageobjects;
 
 import java.time.Duration;
 import java.util.List;
@@ -28,13 +28,11 @@ public class HomePageLeftSideBar {
                 By.xpath(".//li[@index >= '1' and @index <= '5' and not(ancestor::li)]"));
     }
 
-    public void isItemsLeftSideBarCountCorrect(int expectedNumberOfSections) {
-        int actualNumberOfSections = sectionsOnTheLeft.size();
-        softAssert.assertEquals(actualNumberOfSections, expectedNumberOfSections);
-        softAssert.assertAll();
+    public int isItemsLeftSideBarCountCorrect() {
+        return sectionsOnTheLeft.size();
     }
 
-    public void areItemsLeftSideBarDisplayed() {
+    public boolean areItemsLeftSideBarDisplayed() {
         boolean ifItemsLeftBarDisplayed = true;
         for (WebElement section : sectionsOnTheLeft) {
             boolean isSectionDisplayed = section.isDisplayed();
@@ -42,11 +40,10 @@ public class HomePageLeftSideBar {
                 ifItemsLeftBarDisplayed = false;
             }
         }
-        softAssert.assertTrue(ifItemsLeftBarDisplayed);
-        softAssert.assertAll();
+        return ifItemsLeftBarDisplayed;
     }
 
-    public void ifSectionNamesMatch(String[] expectedSections) {
+    public boolean ifSectionNamesMatch(String[] expectedSections) {
         boolean ifSectionNamesMatch = true;
         for (int j = 0; j < sectionsOnTheLeft.size(); j++) {
             String actualSectionText = sectionsOnTheLeft.get(j).getText();
@@ -54,7 +51,6 @@ public class HomePageLeftSideBar {
                 ifSectionNamesMatch = false;
             }
         }
-        softAssert.assertTrue(ifSectionNamesMatch);
-        softAssert.assertAll();
+        return ifSectionNamesMatch;
     }
 }

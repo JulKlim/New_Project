@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.refactored.ex1;
+package com.epam.tc.hw3.refactored.pageobjects;
 
 import java.time.Duration;
 import java.util.List;
@@ -28,29 +28,25 @@ public class HomePageIndex {
                 By.cssSelector(".benefit-txt")));
     }
 
-    public void isImagesCountCorrect(int expectedNumberOfImages) {
-        int actualCountOfImages = images.size();
-        softAssert.assertEquals(actualCountOfImages, expectedNumberOfImages, "Images count is correct");
-        softAssert.assertAll();
+    public int isImagesCountCorrect() {
+        return images.size();
     }
 
-    public void areImagesDisplayed() {
+    public boolean areImagesDisplayed() {
         boolean imagesDisplayed = true;
         for (WebElement image : images) {
             if (!image.isDisplayed()) {
                 imagesDisplayed = false;
             }
         }
-        softAssert.assertTrue(imagesDisplayed);
+        return imagesDisplayed;
     }
 
-    public void isTextsCountCorrect(int expectedNumberOfTexts) {
-        int actualCountOfTexts = texts.size();
-        softAssert.assertEquals(actualCountOfTexts, expectedNumberOfTexts);
-        softAssert.assertAll();
+    public int isTextsCountCorrect() {
+        return texts.size();
     }
 
-    public void areTextsCorrect(String[] expectedTexts) {
+    public boolean areTextsCorrect(String[] expectedTexts) {
         boolean textMatch = true;
         for (int i = 0; i < texts.size(); i++) {
             String actualText = texts.get(i).getText();
@@ -58,6 +54,6 @@ public class HomePageIndex {
                 textMatch = false;
             }
         }
-        softAssert.assertTrue(textMatch);
+        return textMatch;
     }
 }

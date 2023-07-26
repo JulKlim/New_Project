@@ -1,6 +1,5 @@
-package com.epam.tc.hw3.refactored.ex2;
+package com.epam.tc.hw3.refactored.pageobjects;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.time.Duration;
 import org.openqa.selenium.By;
@@ -24,11 +23,8 @@ public class HomePage {
         return this;
     }
 
-    public HomePage checkTitle(String expectedTitle) {
-        wait.until(ExpectedConditions.titleIs(expectedTitle));
-        String actualTitle = driver.getTitle();
-        assertThat(actualTitle).isEqualTo(expectedTitle);
-        return this;
+    public String checkTitle() {
+        return driver.getTitle();
     }
 
     public HomePage performLogin(String username, String password) {
@@ -47,10 +43,9 @@ public class HomePage {
         return this;
     }
 
-    public HomePage assertUsername(String expectedUsername) {
+    public String assertUsername() {
         WebElement username = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#user-name")));
-        assertThat(username.getText()).isEqualTo(expectedUsername);
-        return this;
+        return username.getText();
     }
 
     public void openDifferentElements() {

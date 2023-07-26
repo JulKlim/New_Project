@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.refactored.ex1;
+package com.epam.tc.hw3.refactored.pageobjects;
 
 import java.time.Duration;
 import java.util.List;
@@ -25,13 +25,11 @@ public class HomePageHeader {
                 By.cssSelector("ul.uui-navigation.nav.navbar-nav.m-l8:first-of-type>li>a")));
     }
 
-    public void verifyItemsCount(int expectedNumberOfButtons) {
-        int actualNumberOfButtons = headerButtons.size();
-        softAssert.assertEquals(actualNumberOfButtons, expectedNumberOfButtons, "Items count is correct");
-        softAssert.assertAll();
+    public int verifyItemsCount() {
+        return headerButtons.size();
     }
 
-    public void areItemsNamesCorrect(String[] expectedHeaderButtonsTexts) {
+    public boolean areItemsNamesCorrect(String[] expectedHeaderButtonsTexts) {
         boolean allNamesMatch = true;
         for (int n = 0; n < headerButtons.size(); n++) {
             String actualHeaderText = headerButtons.get(n).getText();
@@ -40,8 +38,7 @@ public class HomePageHeader {
                 break;
             }
         }
-        softAssert.assertTrue(allNamesMatch);
-        softAssert.assertAll();
+        return allNamesMatch;
     }
 
 }

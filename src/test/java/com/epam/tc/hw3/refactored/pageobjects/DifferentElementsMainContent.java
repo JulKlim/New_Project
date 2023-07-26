@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.refactored.ex2;
+package com.epam.tc.hw3.refactored.pageobjects;
 
 import java.time.Duration;
 import org.openqa.selenium.By;

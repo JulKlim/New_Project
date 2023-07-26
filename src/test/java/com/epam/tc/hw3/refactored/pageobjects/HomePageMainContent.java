@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.refactored.ex1;
+package com.epam.tc.hw3.refactored.pageobjects;
 
 import java.time.Duration;
 import org.openqa.selenium.By;
@@ -27,11 +27,10 @@ public class HomePageMainContent {
         driver.switchTo().frame(iframe);
     }
 
-    public void ifFrameButtonExists() {
+    public boolean ifFrameButtonExists() {
         WebElement frameButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector("input#frame-button.btn.btn-info[value='Frame Button']")));
-        softAssert.assertTrue(frameButton.isDisplayed());
-        softAssert.assertAll();
+        return frameButton.isDisplayed();
     }
 
     public void switchToDefaultContent() {
