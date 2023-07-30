@@ -162,5 +162,11 @@
                 <surefire.testingxmlfile>src/test/resources/testconfigs/AllureTests.xml</surefire.testingxmlfile>
             </properties>
         </profile>
+        <profile>
+            <id>HW6_tests_grid</id>
+            <properties>
+                <surefire.testingxmlfile>src/test/resources/testconfigs/grid.xml</surefire.testingxmlfile>
+            </properties>
+        </profile>
     </profiles>
 </project>
