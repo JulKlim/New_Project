@@ -16,6 +16,13 @@
         <checkstyle.version>9.2.1</checkstyle.version>
         <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
         <testng.version>7.4.0</testng.version>
+        <slf4j-simple.version>2.0.5</slf4j-simple.version>
+        <allure-testng.version>2.20.1</allure-testng.version>
+        <aspectjweaver.version>1.9.19</aspectjweaver.version>
+        <webdrivermanager.version>5.3.2</webdrivermanager.version>
+        <selenium-java.version>4.9.1</selenium-java.version>
+        <assertj-core.version>3.24.2</assertj-core.version>
+        <allure-maven.version>2.12.0</allure-maven.version>
     </properties>
     <build>
         <plugins>
@@ -64,7 +71,7 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>2.12.0</version>
+                <version>${allure-maven.version}</version>
                 <configuration>
                     <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
                 </configuration>
@@ -89,44 +96,49 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.24.2</version>
+            <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- Selenium WebDriver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.9.1</version>
+            <version>${selenium-java.version}</version>
         </dependency>
         <!-- WebDriver manager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.3.2</version>
+            <version>${webdrivermanager.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.9.19</version>
+            <version>${aspectjweaver.version}</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <version>2.20.1</version>
+            <version>${allure-testng.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.5</version>
+            <version>${slf4j-simple.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>RELEASE</version>
         </dependency>
     </dependencies>
     <profiles>
         <profile>
             <id>AllTestsProfile</id>
             <properties>
-            <surefire.testingxmlfile>src/test/resources/testconfigs/alltests.xml</surefire.testingxmlfile>
+                <surefire.testingxmlfile>src/test/resources/testconfigs/alltests.xml</surefire.testingxmlfile>
             </properties>
         </profile>
         <profile>
