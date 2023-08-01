@@ -6,16 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public class WebdriverSetUp {
     public WebDriver driver;
     public WebDriverWait wait;
-    public HomePageHeader homePageHeader;
-    public HomePageIndex homePageIndex;
-    public HomePageMainContent homePageMainContent;
-    public HomePageLeftSideBar homePageLeftSideBar;
-    public HomePage homePage;
 
     @BeforeClass
     public void setUp() {
@@ -26,10 +22,12 @@ public class WebdriverSetUp {
 
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        homePage = new HomePage(driver);
-        homePageHeader = new HomePageHeader(driver);
-        homePageIndex = new HomePageIndex(driver);
-        homePageMainContent = new HomePageMainContent(driver);
-        homePageLeftSideBar = new HomePageLeftSideBar(driver);
+        driver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
+    }
+
+    @AfterClass
+    public void closing() {
+        driver.quit();
     }
 }
+

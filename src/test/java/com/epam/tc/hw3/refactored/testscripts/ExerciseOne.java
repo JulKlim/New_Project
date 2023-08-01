@@ -2,27 +2,21 @@ package com.epam.tc.hw3.refactored.testscripts;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.epam.tc.hw2.ex1.WebdriverSetUp;
 import com.epam.tc.hw3.refactored.pageobjects.HomePage;
 import com.epam.tc.hw3.refactored.pageobjects.HomePageHeader;
 import com.epam.tc.hw3.refactored.pageobjects.HomePageIndex;
 import com.epam.tc.hw3.refactored.pageobjects.HomePageLeftSideBar;
 import com.epam.tc.hw3.refactored.pageobjects.HomePageMainContent;
-import org.testng.annotations.AfterTest;
+import com.epam.tc.hw3.refactored.pageobjects.LoginForm;
+import com.epam.tc.hw3.refactored.pageobjects.WebdriverSetUp;
 import org.testng.annotations.Test;
 
 
 public class ExerciseOne extends WebdriverSetUp {
 
     //1 Open test site by URL
-    @Test(priority = 1)
-    public void openHomePage() {
-        HomePage homePage = new HomePage(driver);
-        homePage.openHomePage();
-    }
-
     //2 Assert Browser title
-    @Test(priority = 2)
+    @Test(priority = 1)
     public void checkTitle() {
         HomePage homePage = new HomePage(driver);
         String actualTitle = homePage.checkTitle();
@@ -30,24 +24,27 @@ public class ExerciseOne extends WebdriverSetUp {
     }
 
     //3 Perform login
-    @Test(priority = 3)
+    @Test(priority = 2)
     public void performLogin() {
         HomePage homePage = new HomePage(driver);
-        homePage.performLogin("Roman", "Jdi1234");
+        homePage.openLoginForm();
+
+        LoginForm loginForm = new LoginForm(driver);
+        loginForm.performLogin("Roman", "Jdi1234");
     }
 
     //4 Assert Username is logged
-    @Test(priority = 4)
+    @Test(priority = 3)
     public void assertUsername() {
-        HomePage homePage = new HomePage(driver);
-        assertThat(homePage.assertUsername()).isEqualTo("ROMAN IOVLEV");
+        LoginForm loginForm = new LoginForm(driver);
+        assertThat(loginForm.assertUsername()).isEqualTo("ROMAN IOVLEV");
     }
 
     //5 Assert that there are 4 items on the header section are displayed,
     //and they have proper
     //texts
 
-    @Test(priority = 5)
+    @Test(priority = 4)
     public void assertHeaderItems() {
         HomePageHeader homePageHeader = new HomePageHeader(driver);
         String[] expectedHeaderButtonsTexts = {"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"};
@@ -58,7 +55,7 @@ public class ExerciseOne extends WebdriverSetUp {
     }
 
     //6 Assert there are 4 images on the index page and all of them are displayed
-    @Test(priority = 6)
+    @Test(priority = 5)
     public void assertIconsCountAndDisplay() {
         HomePageIndex homePageIndex = new HomePageIndex(driver);
         assertThat(homePageIndex.isImagesCountCorrect()).isEqualTo(4);
@@ -67,7 +64,7 @@ public class ExerciseOne extends WebdriverSetUp {
 
     //7 Assert there are 4 texts under icons, each of them contains proper text
 
-    @Test(priority = 7)
+    @Test(priority = 6)
     public void asserTexts() {
         HomePageIndex homePageIndex = new HomePageIndex(driver);
         assertThat(homePageIndex.isTextsCountCorrect()).isEqualTo(4);
@@ -82,7 +79,7 @@ public class ExerciseOne extends WebdriverSetUp {
     }
 
     //8 Assert that iframe exists and contains Frame button
-    @Test(priority = 8)
+    @Test(priority = 7)
     public void checkIframe() {
         HomePageMainContent homePageMainContent = new HomePageMainContent(driver);
 
@@ -96,7 +93,7 @@ public class ExerciseOne extends WebdriverSetUp {
 
     //10 Switching to original window
 
-    @Test(priority = 9)
+    @Test(priority = 8)
     public void switchToIframe() {
         HomePageMainContent homePageMainContent = new HomePageMainContent(driver);
         homePageMainContent.switchToDefaultContent();
@@ -104,7 +101,7 @@ public class ExerciseOne extends WebdriverSetUp {
 
     //11 Assert there are 5 items in the Left section displayed and contain proper texts
 
-    @Test(priority = 10)
+    @Test(priority = 9)
     public void itemsLeftSection() {
         HomePageLeftSideBar homePageLeftSideBar = new HomePageLeftSideBar(driver);
         assertThat(homePageLeftSideBar.isItemsLeftSideBarCountCorrect()).isEqualTo(5);
@@ -117,9 +114,4 @@ public class ExerciseOne extends WebdriverSetUp {
     }
 
     //12 Closing browser
-    @AfterTest
-    public void closing() {
-        driver.quit();
-    }
 }
-

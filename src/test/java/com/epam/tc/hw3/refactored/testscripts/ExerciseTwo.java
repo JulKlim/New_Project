@@ -2,11 +2,11 @@ package com.epam.tc.hw3.refactored.testscripts;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.epam.tc.hw2.ex1.WebdriverSetUp;
 import com.epam.tc.hw3.refactored.pageobjects.DifferentElementsLog;
 import com.epam.tc.hw3.refactored.pageobjects.DifferentElementsMainContent;
 import com.epam.tc.hw3.refactored.pageobjects.HomePage;
-import org.testng.annotations.AfterClass;
+import com.epam.tc.hw3.refactored.pageobjects.LoginForm;
+import com.epam.tc.hw3.refactored.pageobjects.WebdriverSetUp;
 import org.testng.annotations.Test;
 
 
@@ -21,10 +21,12 @@ public class ExerciseTwo extends WebdriverSetUp {
     @Test(priority = 1)
     public void homePageActions() {
         HomePage homePage = new HomePage(driver);
-        homePage.openHomePage();
         assertThat(homePage.checkTitle()).isEqualTo("Home Page");
-        homePage.performLogin("Roman", "Jdi1234");
-        assertThat(homePage.assertUsername()).isEqualTo("ROMAN IOVLEV");
+        homePage.openLoginForm();
+
+        LoginForm loginForm = new LoginForm(driver);
+        loginForm.performLogin("Roman", "Jdi1234");
+        assertThat(loginForm.assertUsername()).isEqualTo("ROMAN IOVLEV");
         homePage.openDifferentElements();
     }
 
@@ -33,7 +35,7 @@ public class ExerciseTwo extends WebdriverSetUp {
     public void selectWaterAndWind() {
         DifferentElementsMainContent differentElementsMainContent = new DifferentElementsMainContent(driver);
         differentElementsMainContent.selectWater()
-                        .selectWind();
+                .selectWind();
     }
 
     //7 Select radio Selen
@@ -77,8 +79,4 @@ public class ExerciseTwo extends WebdriverSetUp {
     }
 
     //10 Closing browser
-    @AfterClass
-    public void closing() {
-        driver.quit();
-    }
 }
