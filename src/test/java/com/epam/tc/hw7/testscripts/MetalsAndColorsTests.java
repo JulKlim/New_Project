@@ -7,19 +7,21 @@ import com.epam.jdi.light.elements.init.PageFactory;
 import com.epam.tc.hw7.entities.HomePage;
 import com.epam.tc.hw7.entities.JdiSite;
 import com.epam.tc.hw7.entities.MetalsColorsPage;
+import com.epam.tc.hw7.entities.MetalsColorsResults;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MetalsAndColorsTests {
     @BeforeClass
     public static void setUp() {
         PageFactory.initElements(JdiSite.class);
-        WebDriverFactory.getDriver(); // Open browser (by default, Chrome)
+        WebDriverFactory.getDriver();
     }
 
     @Test (priority = 1)
@@ -58,6 +60,42 @@ public class MetalsAndColorsTests {
     public void selectColor() {
         MetalsColorsPage.selectColor("Green");
     }
+
+    @Test (priority = 6)
+    public void selectMetal() {
+        MetalsColorsPage.selectMetal("Gold");
+    }
+
+    @Test (priority = 7)
+    public void selectVegetables() {
+        String[] vegetables = {"Tomato", "Vegetables"};
+        MetalsColorsPage.selectVegetables(vegetables);
+    }
+
+    @Test (priority = 8)
+    public void clickSubmitButton() {
+        MetalsColorsPage.submitButton.click();
+    }
+
+    @Test (priority = 9)
+    public void checkResultList() throws IOException {
+        //MetalsColorsResults.getResultPanelValues();
+        // Read the test data from the JSON file
+        TestData testData = TestDataReader.readTestData("path/to/your/json/file.json");
+        TestDataEntry testDataEntry = testData.getData_2(); // Replace "data_2" with the desired test data index
+
+        String expectedText = String.format(
+                "Summary: %d\nElements: %s\nColor: %s\nMetal: %s\nVegetables: %s",
+                testDataEntry.getSummary().get(0),
+                String.join(", ", testDataEntry.getElements()),
+                testDataEntry.getColor(),
+                testDataEntry.getMetals(),
+                String.join(", ", testDataEntry.getVegetables())
+        );
+
+        assertThat(MetalsColorsResults.getResultPanelValues()).isEqualTo(expectedText);
+    }
+
 
     //@AfterClass
     public static void tearDown() {

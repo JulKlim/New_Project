@@ -31,6 +31,15 @@ public class MetalsColorsPage extends WebPage {
     @FindBy(css = "#colors")
     public static Dropdown colorsDropdown;
 
+    @FindBy(css = "#metals")
+    public static Dropdown metalsDropdown;
+
+    @FindBy(css = "#salad-dropdown")
+    public static Dropdown vegetablesDropdown;
+
+    @FindBy(css = "#submit-button")
+    public static Button submitButton;
+
     public static void selectOddNumber(int oddNumber){
         WebElement number = radioButtonsOddNumbers.find((
                 By.xpath("//label[contains(text(), '" + oddNumber + "')]")));
@@ -53,7 +62,28 @@ public class MetalsColorsPage extends WebPage {
 
     public static void selectColor(String color){
         colorsDropdown.expand();
-        colorsDropdown.find(By.xpath("//label[contains(text(), ' + element + ')]"));
+        WebElement colorFromDropdown = colorsDropdown.find(
+                By.xpath("//span[contains(text(), '" + color + "')]"));
+        colorFromDropdown.click();
+
+    }
+
+    public static void selectMetal(String metal){
+        metalsDropdown.expand();
+        WebElement metalFromDropdown = metalsDropdown.find(By.xpath(
+                "//div/div//ul//li//a//span[contains(text(), '" + metal + "')]"));
+        metalFromDropdown.click();
+    }
+
+    public static void selectVegetables(String[] vegetables){
+        vegetablesDropdown.expand();
+        vegetablesDropdown.find(By.xpath(
+                "//ul//li//label[contains(text(), 'Vegetables')]")).click();
+        for (String vegetable : vegetables){
+            WebElement checkboxVeg = vegetablesDropdown.find(By.xpath(
+                    "//ul//li//label[contains(text(), '" + vegetable + "')]"));
+            checkboxVeg.click();
+        }
     }
 
 }
