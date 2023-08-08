@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
-import org.openqa.selenium.WebElement;
 
 public class HomePage extends WebPage {
     @FindBy(css = "#user-icon")

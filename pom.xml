@@ -180,5 +180,11 @@
                 <surefire.testingxmlfile>src/test/resources/testconfigs/grid.xml</surefire.testingxmlfile>
             </properties>
         </profile>
+        <profile>
+        <id>HW7_Jdi_Tests</id>
+        <properties>
+            <surefire.testingxmlfile>src/test/resources/testconfigs/Jdi_Tests.xml</surefire.testingxmlfile>
+        </properties>
+    </profile>
     </profiles>
 </project>

@@ -8,23 +8,23 @@ import com.epam.tc.hw7.entities.HomePage;
 import com.epam.tc.hw7.entities.JdiSite;
 import com.epam.tc.hw7.entities.MetalsColorsPage;
 import com.epam.tc.hw7.entities.MetalsColorsResults;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import com.epam.tc.hw7.testdata.TestDataEntry;
+import com.epam.tc.hw7.testdata.TestDataProvider;
+import java.io.IOException;
+import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-import java.util.List;
-
 public class MetalsAndColorsTests {
+
     @BeforeClass
     public static void setUp() {
         PageFactory.initElements(JdiSite.class);
         WebDriverFactory.getDriver();
     }
 
-    @Test (priority = 1)
+    @Test(priority = 1)
     public void loginTest() {
         JdiSite jdiSite = new JdiSite();
         jdiSite.open();
@@ -38,66 +38,32 @@ public class MetalsAndColorsTests {
         HomePage.headerMenuMetalsAnsColors.click();
     }
 
-    @Test (priority = 2)
+    @Test(priority = 2)
     public void openMetalsColorsPageTest() {
         assertThat(MetalsColorsPage.getTitle().equals("Metal and Colors"));
     }
 
-    @Test (priority = 3)
-    public void selectRadioButtons() {
-        MetalsColorsPage.selectOddNumber(5);
-        MetalsColorsPage.selectEvenNumber(6);
+    @Test(priority = 3, dataProvider = "testDataEntries", dataProviderClass = TestDataProvider.class)
+    public void fillInAndSubmitForm(TestDataEntry testDataEntry) throws IOException {
+        int oddNumber = testDataEntry.getSummary().get(0);
+        int evenNumber = testDataEntry.getSummary().get(1);
+        MetalsColorsPage.selectOddNumber(oddNumber);
+        MetalsColorsPage.selectEvenNumber(evenNumber);
         MetalsColorsPage.calculateButton.click();
-    }
-
-    @Test (priority = 4)
-    public void selectElements() {
-        String[] elements = {"Water", "Fire"};
+        List<String> elements = testDataEntry.getElements();
         MetalsColorsPage.selectElements(elements);
-    }
-
-    @Test (priority = 5)
-    public void selectColor() {
-        MetalsColorsPage.selectColor("Green");
-    }
-
-    @Test (priority = 6)
-    public void selectMetal() {
-        MetalsColorsPage.selectMetal("Gold");
-    }
-
-    @Test (priority = 7)
-    public void selectVegetables() {
-        String[] vegetables = {"Tomato", "Vegetables"};
-        MetalsColorsPage.selectVegetables(vegetables);
-    }
-
-    @Test (priority = 8)
-    public void clickSubmitButton() {
+        MetalsColorsPage.selectColor(testDataEntry.getColor());
+        MetalsColorsPage.selectMetal(testDataEntry.getMetals());
+        MetalsColorsPage.selectVegetables(testDataEntry.getVegetables());
         MetalsColorsPage.submitButton.click();
+
+        String[] expectedResult = MetalsColorsResults.getExpectedPanelValues(testDataEntry);
+        assertThat(MetalsColorsResults.getResultPanelValues()
+                .toArray(new String[0])).isEqualTo(expectedResult);
+        MetalsColorsPage.refresh();
     }
 
-    @Test (priority = 9)
-    public void checkResultList() throws IOException {
-        //MetalsColorsResults.getResultPanelValues();
-        // Read the test data from the JSON file
-        TestData testData = TestDataReader.readTestData("path/to/your/json/file.json");
-        TestDataEntry testDataEntry = testData.getData_2(); // Replace "data_2" with the desired test data index
-
-        String expectedText = String.format(
-                "Summary: %d\nElements: %s\nColor: %s\nMetal: %s\nVegetables: %s",
-                testDataEntry.getSummary().get(0),
-                String.join(", ", testDataEntry.getElements()),
-                testDataEntry.getColor(),
-                testDataEntry.getMetals(),
-                String.join(", ", testDataEntry.getVegetables())
-        );
-
-        assertThat(MetalsColorsResults.getResultPanelValues()).isEqualTo(expectedText);
-    }
-
-
-    //@AfterClass
+    @AfterClass
     public static void tearDown() {
         WebDriverFactory.quit();
     }

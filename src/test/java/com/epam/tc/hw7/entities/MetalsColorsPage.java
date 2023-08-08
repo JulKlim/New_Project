@@ -6,13 +6,11 @@ import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
+import java.io.IOException;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import java.nio.channels.Selector;
-import java.util.List;
 
 public class MetalsColorsPage extends WebPage {
 
@@ -24,6 +22,7 @@ public class MetalsColorsPage extends WebPage {
 
     @FindBy(css = "#calculate-button")
     public static Button calculateButton;
+
 
     @FindBy(css = "#elements-checklist")
     public static Checklist elementsChecklist;
@@ -40,27 +39,27 @@ public class MetalsColorsPage extends WebPage {
     @FindBy(css = "#submit-button")
     public static Button submitButton;
 
-    public static void selectOddNumber(int oddNumber){
+    public static void selectOddNumber(int oddNumber) {
         WebElement number = radioButtonsOddNumbers.find((
                 By.xpath("//label[contains(text(), '" + oddNumber + "')]")));
         number.click();
     }
 
-    public static void selectEvenNumber(int evenNumber){
+    public static void selectEvenNumber(int evenNumber) {
         WebElement number = radioButtonsEvenNumbers.find(
                 By.xpath("//label[contains(text(), '" + evenNumber + "')]"));
         number.click();
     }
 
-    public static void selectElements(String[] elements){
-        for (String element: elements){
+    public static void selectElements(List<String> elements) {
+        for (String element : elements) {
             WebElement checkbox = elementsChecklist.find(
                     By.xpath("//label[contains(text(), '" + element + "')]"));
             checkbox.click();
         }
     }
 
-    public static void selectColor(String color){
+    public static void selectColor(String color) {
         colorsDropdown.expand();
         WebElement colorFromDropdown = colorsDropdown.find(
                 By.xpath("//span[contains(text(), '" + color + "')]"));
@@ -68,18 +67,18 @@ public class MetalsColorsPage extends WebPage {
 
     }
 
-    public static void selectMetal(String metal){
+    public static void selectMetal(String metal) {
         metalsDropdown.expand();
         WebElement metalFromDropdown = metalsDropdown.find(By.xpath(
                 "//div/div//ul//li//a//span[contains(text(), '" + metal + "')]"));
         metalFromDropdown.click();
     }
 
-    public static void selectVegetables(String[] vegetables){
+    public static void selectVegetables(List<String> vegetables) {
         vegetablesDropdown.expand();
         vegetablesDropdown.find(By.xpath(
                 "//ul//li//label[contains(text(), 'Vegetables')]")).click();
-        for (String vegetable : vegetables){
+        for (String vegetable : vegetables) {
             WebElement checkboxVeg = vegetablesDropdown.find(By.xpath(
                     "//ul//li//label[contains(text(), '" + vegetable + "')]"));
             checkboxVeg.click();
