@@ -7,5 +7,5 @@ hub="http://192.168.1.2:4444"
 
 [[node.driver-configuration]]
 display-name = "firefox"
-stereotype = '{"browserName": "firefox", "moz:firefoxOptions.binary": "C:\Users\Yulia_Klimova\geckodriver.exe"}'
+stereotype = '{"browserName": "firefox"}'
 max-sessions = 5
