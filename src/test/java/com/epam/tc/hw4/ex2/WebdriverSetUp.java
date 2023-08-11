@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.ex2;
+package com.epam.tc.hw4.ex2;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.time.Duration;

@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.ex2;
+package com.epam.tc.hw6.common;
 
 import java.time.Duration;
 import org.openqa.selenium.By;
@@ -17,43 +17,43 @@ public class HomePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    public void openHomePage() {
+    public HomePage openHomePage() {
         driver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
+        return this;
     }
 
-    public boolean checkTitle(String expectedTitle) {
-        //wait.until(ExpectedConditions.titleIs(expectedTitle));
-        String actualTitle = driver.getTitle();
-        return actualTitle.equals(expectedTitle);
+    public String checkTitle() {
+        return driver.getTitle();
     }
 
-    public void performLogin(String username, String password) {
+    public HomePage performLogin(String username, String password) {
         WebElement dropdownMenu = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-icon")));
         dropdownMenu.click();
+
         WebElement loginField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#name")));
         loginField.sendKeys(username);
+
         WebElement passField = driver.findElement(By.cssSelector("#password"));
         passField.sendKeys(password);
+
         WebElement enter = driver.findElement(By.cssSelector("#login-button"));
         enter.click();
+
+        return this;
     }
 
-    public boolean assertUsername(String expectedUsername) {
-        WebElement username = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#user-name")));
-        return username.getText().equals(expectedUsername);
+    public String assertUsername() {
+        WebElement username = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#user-name")));
+        return username.getText();
     }
 
     public void openDifferentElements() {
         WebElement menuService = wait.until(
-                ExpectedConditions.elementToBeClickable(
-                        By.cssSelector(".menu-title[index='3']")));
+                ExpectedConditions.elementToBeClickable(By.cssSelector(".menu-title[index='3']")));
         menuService.click();
 
         WebElement differentElements = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.linkText("Different elements")));
+                ExpectedConditions.visibilityOfElementLocated(By.linkText("Different elements")));
         differentElements.click();
     }
-
 }
