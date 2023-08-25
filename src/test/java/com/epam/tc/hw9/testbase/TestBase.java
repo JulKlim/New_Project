@@ -1,4 +1,4 @@
-package com.epam.tc.hw9.testdata;
+package com.epam.tc.hw9.testbase;
 
 import static io.restassured.RestAssured.given;
 
@@ -16,5 +16,5 @@ public class TestBase {
             .header("accept", "application/json")
             .header("Content-Type", "application/json");
     }
-
 }
+
