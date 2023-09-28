@@ -146,6 +146,9 @@
             </properties>
         </profile>
         <profile>
+            <id>HW3_Tests</id>
+            <properties>
+                <surefire.testingxmlfile>src/test/resources/testconfigs/HW3Tests.xml</surefire.testingxmlfile>
             <id>HW9_RestAssured_Tests</id>
             <properties>
                 <surefire.testingxmlfile>src/test/resources/testconfigs/HW9_RestAssured_Tests.xml</surefire.testingxmlfile>

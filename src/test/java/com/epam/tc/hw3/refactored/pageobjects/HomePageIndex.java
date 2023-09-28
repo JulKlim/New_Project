@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.ex1;
+package com.epam.tc.hw3.refactored.pageobjects;
 
 import java.time.Duration;
 import java.util.List;
@@ -7,27 +7,32 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.asserts.SoftAssert;
 
 
 public class HomePageIndex {
     final WebDriver driver;
     final WebDriverWait wait;
 
+    final SoftAssert softAssert;
+    final List<WebElement> images;
+    final List<WebElement> texts;
+
     public HomePageIndex(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.softAssert = new SoftAssert();
+        this.images = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.xpath("//*[contains(@class, 'benefit-icon')]")));
+        this.texts = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.cssSelector(".benefit-txt")));
     }
 
-    public boolean isImagesCountCorrect(int expectedNumberOfImages) {
-        List<WebElement> images = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.xpath("//*[contains(@class, 'benefit-icon')]")));
-
-        return images.size() == expectedNumberOfImages;
+    public int isImagesCountCorrect() {
+        return images.size();
     }
 
-    public boolean imagesDisplayed() {
-        List<WebElement> images = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.xpath("//*[contains(@class, 'benefit-icon')]")));
+    public boolean areImagesDisplayed() {
         boolean imagesDisplayed = true;
         for (WebElement image : images) {
             if (!image.isDisplayed()) {
@@ -37,16 +42,11 @@ public class HomePageIndex {
         return imagesDisplayed;
     }
 
-    public boolean isTextsCountCorrect(int expectedNumberOfTexts) {
-        List<WebElement> texts = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.cssSelector(".benefit-txt")));
-
-        return texts.size() == expectedNumberOfTexts;
+    public int isTextsCountCorrect() {
+        return texts.size();
     }
 
     public boolean areTextsCorrect(String[] expectedTexts) {
-        List<WebElement> texts = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.cssSelector(".benefit-txt")));
         boolean textMatch = true;
         for (int i = 0; i < texts.size(); i++) {
             String actualText = texts.get(i).getText();
